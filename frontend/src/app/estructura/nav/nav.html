@@ -1,0 +1,29 @@
+<button
+  type="button"
+  class="vs-menu-toggle"
+  [class.is-open]="menuAbierto"
+  (click)="alternarMenu()"
+  [attr.aria-expanded]="menuAbierto"
+  aria-controls="vsSidebar"
+  aria-label="Abrir menú de navegación">
+  <i class="bi" [class.bi-list]="!menuAbierto" [class.bi-x-lg]="menuAbierto"></i>
+</button>
+
+<div class="vs-sidebar-backdrop" [class.is-visible]="menuAbierto" (click)="cerrarMenu()"></div>
+
+<nav id="vsSidebar" class="vs-sidebar p-3" [class.is-open]="menuAbierto">
+    <div class="text-center mb-4">
+        <img src="/img/ICLE.png" height="100">
+    </div>
+    <ul class="nav flex-column">
+    <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/dashboard" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a></li>
+    <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/vehiculos" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-car mr-2"></i>Vehículos</a></li>
+    <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/clientes" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-users mr-2"></i>Clientes</a></li>
+    <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/ventas" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-shopping-cart mr-2"></i>Ventas</a></li>
+    @if (puedeVerCompras) {
+      <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/compras" routerLinkActive="active" (click)="cerrarMenu()"><i class="bi bi-bag mr-2"></i>Compras</a></li>
+    }
+  </ul>
+</nav>
+
+ 

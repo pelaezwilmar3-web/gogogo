@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding-top: 4rem;
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+}
+
+.vs-login-card {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+  color: #17202a;
+}
+
+.vs-login-card label,
+.vs-login-card p {
+  color: #17202a;
+}
+
+.vs-login-card .text-primary {
+  color: #075985 !important;
+}
+
+.vs-error-text {
+  color: #b42318;
+}
+
+.vs-success-text {
+  color: #166534;
+}

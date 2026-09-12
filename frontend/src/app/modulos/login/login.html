@@ -1,0 +1,65 @@
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="vs-login-card p-4 p-md-5">
+          <div class="text-center mb-4">
+            <!-- Logo -->
+             <img src="img/ICLE.png" height="100" class="mb-2" alt="VehicleSoftware">
+            <div class="mb-2">
+              <!-- Aquí puedes poner tu <img src="..." alt="VehicleSoftware"> -->
+              <span class="fw-bold fs-4 text-primary">Vehicle<span class="text-info">Software</span></span>
+            </div>
+            <p class="mb-0 text-muted">Bienvenido al concesionario</p>
+          </div>
+
+          <form (ngSubmit)="consulta()">
+            <div class="mb-3">
+              <label class="form-label" for="loginEmail">Correo / usuario</label>
+              <input id="loginEmail" name="email" type="email" class="form-control" placeholder="ejemplo@correo.com" [(ngModel)]="email" required>
+            </div>
+
+            <div class="mb-1">
+              <label class="form-label" for="loginPassword">Contraseña</label>
+              <div class="input-group">
+                <input id="loginPassword" name="clave" [type]="mostrarPassword ? 'text' : 'password'" class="form-control" placeholder="Contraseña" [(ngModel)]="clave" required>
+                <button type="button" class="btn btn-outline-secondary" (click)="alternarPassword()" [attr.aria-label]="mostrarPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+                  <i [class]="mostrarPassword ? 'bi bi-eye-slash' : 'bi bi-eye'" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="mb-3" [hidden]="!error">
+              <span class="vs-error-text">{{ mensajeError }}</span>
+            </div>
+
+            <div class="d-grid mb-3" [hidden]="!usuarioNoExiste">
+              <button type="button" class="btn btn-outline-primary" (click)="router.navigate(['/registro'])">
+                Registrar una cuenta
+              </button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <a href="#" class="small text-decoration-none text-primary">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="d-grid mb-2">
+              <button type="submit" class="btn btn-vs-primary btn-lg" [disabled]="cargando">
+                {{ cargando ? 'Validando...' : 'Ingresar' }}
+              </button>
+            </div>
+          </form>
+
+          <div class="text-center mt-3">
+            <span class="small text-muted">¿Aún no tienes una cuenta?</span>
+            <button type="button" class="btn btn-link btn-sm text-decoration-none" (click)="router.navigate(['/registro'])">
+              Registrarte
+            </button>
+          </div>
+
+          <div class="text-center mt-3">
+            <small class="text-muted">© 2026 VehicleSoftware · Concesionario</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

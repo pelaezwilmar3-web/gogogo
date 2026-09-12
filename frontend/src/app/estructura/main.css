@@ -1,0 +1,9 @@
+ #vsMain {
+	margin-left: 250px;
+}
+
+@media (max-width: 767.98px) {
+	#vsMain {
+		margin-left: 0;
+	}
+}

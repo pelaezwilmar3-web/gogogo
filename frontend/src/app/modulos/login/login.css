@@ -1,0 +1,56 @@
+:host {
+	display: block;
+	min-height: 100vh;
+}
+
+.vs-login-bg {
+	min-height: 100vh;
+	background-image: linear-gradient(rgba(8, 20, 32, 0.35), rgba(8, 20, 32, 0.35)), url('/img/login.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.password-toggle {
+	min-width: 46px;
+}
+
+.vs-login-card {
+	background-color: rgba(255, 255, 255, 0.94);
+	border-radius: 16px;
+	box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+	color: #17202a;
+}
+
+.vs-login-card label,
+.vs-login-card small,
+.vs-login-card p {
+	color: #17202a !important;
+}
+
+.vs-login-card .text-primary {
+	color: #075985 !important;
+}
+
+.vs-login-card .text-info {
+	color: #0f766e !important;
+}
+
+.vs-login-card .form-control,
+.vs-login-card .form-select {
+	background-color: #ffffff;
+	color: #17202a;
+}
+
+.vs-login-card .form-control::placeholder {
+	color: #64748b;
+	opacity: 1;
+}
+
+.vs-login-card .vs-error-text {
+	color: #b42318;
+}
+
+.vs-login-card a {
+	color: #075985 !important;
+}

@@ -1,0 +1,77 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">    
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Clientes</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-rigth">
+                    <li class="breadcrum-item"><a href="#">Home</a></li>
+                    <li class="breadcrum-item active">Clientes</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content">
+  <div class="container-fluid">
+    <!-- contenido -->
+     <hr>
+         <button type="button" class="btn btn-warning" (click)="nuevo()">Insertar Cliente</button>
+     <!-- formulario -->
+            <div id="formulario" *ngIf="mostrarFormulario" class="row mt-3">
+                <div class="col-lg-10">
+                    <form (ngSubmit)="guardar()" class="row g-2">
+                        <div class="col-md-4"><label class="form-label">Identificación</label><input class="form-control" name="identificacion" [(ngModel)]="formulario.identificacion" required></div>
+                        <div class="col-md-4"><label class="form-label">Nombre</label><input class="form-control" name="nombre" [(ngModel)]="formulario.nombre" required></div>
+                        <div class="col-md-4"><label class="form-label">Dirección</label><input class="form-control" name="direccion" [(ngModel)]="formulario.direccion" required></div>
+                        <div class="col-md-4"><label class="form-label">Celular</label><input class="form-control" name="celular" [(ngModel)]="formulario.celular" required></div>
+                        <div class="col-md-4"><label class="form-label">Email</label><input class="form-control" type="email" name="email" [(ngModel)]="formulario.email" required></div>
+                        <div class="col-md-4"><label class="form-label">ID ciudad</label><input class="form-control" type="number" name="fo_ciudad" [(ngModel)]="formulario.fo_ciudad" required></div>
+                        <div class="col-12"><button class="btn btn-primary me-2" type="submit">Guardar</button><button class="btn btn-secondary" type="button" (click)="mostrarFormulario = false">Cancelar</button></div>
+                    </form>
+                </div>
+            </div>
+      <hr>
+      <div id="tabla">
+                <p *ngIf="error" class="text-danger">{{ error }}</p>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="table responsive">
+                    <table class="table">
+                        <tr>
+                            <th>Identificacion</th>
+                            <th>Nombre</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                            <th>Acciones</th>
+                        </tr>
+                        @for (item of clientes(); track item.id_cliente) {
+                        <tr>
+                            <td>{{item.identificacion}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.direccion}}</td>
+                            <td>{{item.celular}}</td>
+                            <td>{{item.email}}</td>
+                                                                <td>
+                                                                        <button type="button" class="btn btn-link p-1" (click)="editar(item)" title="Editar">
+                                                                            <i class="bi bi-pencil-square text-primary"></i>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-link p-1" (click)="eliminar(item.id_cliente)" title="Eliminar">
+                                                                            <i class="bi bi-trash text-danger"></i>
+                                                                        </button>
+                                                                </td>
+                            </tr>
+                        }
+                    </table> 
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+      </div>
+
+    </div>
+</section>

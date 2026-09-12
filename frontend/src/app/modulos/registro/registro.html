@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="vs-login-card p-4 p-md-5">
+        <div class="text-center mb-4">
+          <img src="img/ICLE.png" height="80" class="mb-2" alt="VehicleSoftware">
+          <div class="fw-bold fs-4 text-primary">Crear cuenta</div>
+          <p class="mb-0 text-muted">Regístrate para acceder al concesionario</p>
+        </div>
+
+        <form (ngSubmit)="registrar()">
+          <div class="mb-3">
+            <label class="form-label" for="registroNombre">Nombre completo</label>
+            <input id="registroNombre" name="nombre" type="text" class="form-control" [(ngModel)]="nombre" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="registroCelular">Celular</label>
+            <input id="registroCelular" name="celular" type="tel" class="form-control" [(ngModel)]="celular">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="registroEmail">Correo</label>
+            <input id="registroEmail" name="email" type="email" class="form-control" [(ngModel)]="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="registroClave">Contraseña</label>
+            <input id="registroClave" name="clave" type="password" class="form-control" [(ngModel)]="clave" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="registroConfirmarClave">Confirmar contraseña</label>
+            <input id="registroConfirmarClave" name="confirmarClave" type="password" class="form-control" [(ngModel)]="confirmarClave" required>
+          </div>
+
+          <div class="mb-3" [hidden]="!error">
+            <span class="vs-error-text">{{ error }}</span>
+          </div>
+
+          <div class="mb-3" [hidden]="!mensaje">
+            <span class="vs-success-text">{{ mensaje }}</span>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-vs-primary btn-lg" [disabled]="cargando">
+              {{ cargando ? 'Creando cuenta...' : 'Registrar' }}
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center mt-3">
+          <button type="button" class="btn btn-link text-decoration-none" (click)="router.navigate(['/login'])">
+            Volver al inicio de sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

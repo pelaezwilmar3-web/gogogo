@@ -1,0 +1,183 @@
+body {
+  background-color: #f5f6fa;
+}
+
+.vs-login-bg {
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(8, 20, 32, 0.35), rgba(8, 20, 32, 0.35)), url('../img/login.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.vs-login-card {
+  background-color: rgba(255, 255, 255, 0.94);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+  color: #17202a;
+}
+
+.vs-login-card label,
+.vs-login-card small,
+.vs-login-card p {
+  color: #17202a !important;
+}
+
+.vs-login-card .text-primary {
+  color: #075985 !important;
+}
+
+.vs-login-card .text-info {
+  color: #0f766e !important;
+}
+
+.vs-login-card .form-control,
+.vs-login-card .form-select {
+  background-color: #ffffff;
+  color: #17202a;
+}
+
+.vs-login-card .form-control::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+.vs-login-card .vs-error-text {
+  color: #b42318;
+}
+
+.vs-login-card a {
+  color: #075985 !important;
+}
+
+.vs-sidebar {
+  background-color: #111;
+  color: white;
+  height: 100vh;
+}
+
+.vs-sidebar .nav-link {
+  color: #ccc;
+}
+
+.vs-sidebar .nav-link.active,
+.vs-sidebar .nav-link:hover {
+  color: #fff;
+}
+
+.card-vs {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.vs-user-pill {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  color: #111;
+}
+
+.vs-user-pill:hover,
+.vs-user-pill:focus {
+  background: #f8f9fa;
+  color: #111;
+}
+
+.dropdown-menu {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.vs-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0d6efd, #20c997);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.btn-vs-primary {
+  background-color: #0d6efd;
+  color: white;
+}
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+.table {
+  font-size: 14px;
+}
+
+@media (max-width: 576px) {
+  .table {
+    font-size: 12px;
+  }
+}
+
+:root {
+  --sidebar-width: 250px;
+  --sidebar-mobile-width: 80%;
+  --footer-height: 0px;
+}
+
+/* ESTILOS RESPONSIVE SIDEBAR */
+@media (max-width: 768px) {
+  /* Mostrar botón toggle en móviles y tablets */
+  .vs-toggle-btn {
+    display: inline-block !important;
+  }
+
+  /* Ajustar main para que no tenga margen izquierdo */
+  main#vsMain {
+    margin-left: 0 !important;
+  }
+
+  /* Sidebar oculto por defecto en móvil */
+  .vs-sidebar {
+    width: 80% !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Sidebar visible cuando está activo */
+  .vs-sidebar.active {
+    transform: translateX(0);
+  }
+
+  /* Overlay oscuro cuando sidebar está abierto */
+  .vs-sidebar.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+/* Pantallas grandes - sidebar siempre visible */
+@media (min-width: 769px) {
+  .vs-toggle-btn {
+    display: none !important;
+  }
+  
+  main#vsMain {
+    margin-left: 250px !important;
+  }
+  
+  .vs-sidebar {
+    transform: translateX(0) !important;
+  }
+}
+

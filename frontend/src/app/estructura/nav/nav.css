@@ -1,0 +1,70 @@
+ :host {
+	display: block;
+}
+
+.vs-sidebar {
+	position: fixed;
+	inset: 0 auto 0 0;
+	z-index: 1040;
+	width: 250px;
+	background: #123047;
+	color: #fff;
+	overflow-y: auto;
+}
+
+.vs-sidebar img {
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.vs-sidebar .nav-link {
+	border-radius: 6px;
+	padding: 0.7rem 0.8rem;
+}
+
+.vs-sidebar .nav-link:hover,
+.vs-sidebar .nav-link.active {
+	background: rgba(255, 255, 255, 0.16);
+}
+
+.vs-menu-toggle,
+.vs-sidebar-backdrop {
+	display: none;
+}
+
+@media (max-width: 767.98px) {
+	.vs-menu-toggle {
+		display: inline-flex;
+		position: fixed;
+		top: 0.75rem;
+		left: 0.75rem;
+		z-index: 1060;
+		width: 44px;
+		height: 44px;
+		align-items: center;
+		justify-content: center;
+		border: 0;
+		border-radius: 6px;
+		background: #123047;
+		color: #fff;
+		font-size: 1.3rem;
+	}
+
+	.vs-sidebar {
+		width: min(280px, 82vw);
+		transform: translateX(-100%);
+		transition: transform 180ms ease;
+	}
+
+	.vs-sidebar.is-open {
+		transform: translateX(0);
+	}
+
+	.vs-sidebar-backdrop.is-visible {
+		display: block;
+		position: fixed;
+		inset: 0;
+		z-index: 1030;
+		background: rgba(0, 0, 0, 0.4);
+	}
+}

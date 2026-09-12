@@ -1,0 +1,62 @@
+<div class="content-header">
+  <div class="container-fluid">
+    <h1 class="m-0">Compras</h1>
+  </div>
+</div>
+<section class="content">
+  <div class="container-fluid">
+    <hr>
+    <button type="button" class="btn btn-warning" (click)="nuevo()">Insertar compra</button>
+    <div *ngIf="mostrarFormulario" class="row mt-3">
+      <div class="col-lg-10">
+        <form (ngSubmit)="guardar()" class="row g-2">
+          <div class="col-md-3"><label class="form-label">Fecha</label><input class="form-control" type="date" name="fecha" [(ngModel)]="formulario.fecha" required></div>
+          <div class="col-md-2"><label class="form-label">Cantidad</label><input class="form-control" type="number" name="cantidad" [(ngModel)]="formulario.cantidad" required></div>
+          <div class="col-md-2"><label class="form-label">Subtotal</label><input class="form-control" type="number" name="subtotal" [(ngModel)]="formulario.subtotal" required></div>
+          <div class="col-md-2"><label class="form-label">Total</label><input class="form-control" type="number" name="total" [(ngModel)]="formulario.total" required></div>
+          <div class="col-md-2"><label class="form-label">Impuesto</label><input class="form-control" type="number" name="impuesto" [(ngModel)]="formulario.impuesto" required></div>
+          <div class="col-md-2"><label class="form-label">ID usuario</label><input class="form-control" type="number" name="fo_usuario" [(ngModel)]="formulario.fo_usuario" required></div>
+          <div class="col-md-2"><label class="form-label">ID proveedor</label><input class="form-control" type="number" name="fo_proveedor" [(ngModel)]="formulario.fo_proveedor" required></div>
+          <div class="col-md-2"><label class="form-label">ID vehículo</label><input class="form-control" type="number" name="fo_vehiculo" [(ngModel)]="formulario.fo_vehiculo" required></div>
+          <div class="col-12"><button class="btn btn-primary me-2" type="submit">Guardar</button><button class="btn btn-secondary" type="button" (click)="mostrarFormulario = false">Cancelar</button></div>
+        </form>
+      </div>
+    </div>
+    <p *ngIf="error" class="text-danger">{{ error }}</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Proveedor</th>
+            <th>Vehículo</th>
+            <th>Usuario</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of compras(); track item.id_compra) {
+            <tr>
+              <td>{{ item.fecha }}</td>
+              <td>{{ item.proveedor }}</td>
+              <td>{{ item.vehiculo }}</td>
+              <td>{{ item.usuario }}</td>
+              <td>{{ item.cantidad }}</td>
+              <td>{{ item.total }}</td>
+              <td>
+                <button type="button" class="btn btn-link p-1" (click)="editar(item)" title="Editar">
+                  <i class="bi bi-pencil-square text-primary"></i>
+                </button>
+                <button type="button" class="btn btn-link p-1" (click)="eliminar(item.id_compra)" title="Eliminar">
+                  <i class="bi bi-trash text-danger"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
