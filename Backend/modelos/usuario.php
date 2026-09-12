@@ -78,11 +78,17 @@
 
             mysqli_stmt_close($consulta);
 
-            $rol = mysqli_query($this->conexion, "SELECT id_rol FROM rol WHERE LOWER(nombre) IN ('cliente', 'usuario') ORDER BY id_rol LIMIT 1");
+            $rol = mysqli_query($this->conexion, "SELECT id_rol FROM rol WHERE LOWER(nombre) = 'invitado' LIMIT 1");
             $rolEncontrado = mysqli_fetch_assoc($rol);
 
             if (!$rolEncontrado) {
-                return array('resultado' => 'ERROR', 'mensaje' => 'No hay un rol público disponible para registrar usuarios.');
+                mysqli_query($this->conexion, "INSERT INTO rol (nombre) VALUES ('Invitado')");
+                $rol = mysqli_query($this->conexion, "SELECT id_rol FROM rol WHERE LOWER(nombre) = 'invitado' LIMIT 1");
+                $rolEncontrado = mysqli_fetch_assoc($rol);
+            }
+
+            if (!$rolEncontrado) {
+                return array('resultado' => 'ERROR', 'mensaje' => 'No se pudo crear el rol público para registrar usuarios.');
             }
 
             $idRol = (int) $rolEncontrado['id_rol'];
