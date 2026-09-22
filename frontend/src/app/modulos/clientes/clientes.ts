@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Cliente } from '../../servicios/cliente';
+import { Ciudad } from '../../servicios/ciudad';
+import { Dpto } from '../../servicios/dpto';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,11 +19,15 @@ export class Clientes implements OnInit {
   idEditando: number | null = null;
   formulario = this.formularioVacio();
   error = '';
+  departamentos: any[] = [];
+  ciudades: any[] = [];
+  ciudadesDisponibles: any[] = [];
 
-  constructor(private scli: Cliente) {}
+  constructor(private scli: Cliente, private sciudad: Ciudad, private sdpto: Dpto) {}
 
   ngOnInit(): void {
     this.consulta();
+    this.cargarCatalogos();
   }
 
   consulta(): void {
@@ -37,12 +43,27 @@ export class Clientes implements OnInit {
   }
 
   formularioVacio(): any {
-    return { identificacion: '', nombre: '', direccion: '', celular: '', email: '', fo_ciudad: '' };
+    return { identificacion: '', nombre: '', direccion: '', celular: '', email: '', fo_dpto: '', fo_ciudad: '' };
+  }
+
+  cargarCatalogos(): void {
+    this.sdpto.consulta().subscribe({
+      next: (resultado: any) => this.departamentos = Array.isArray(resultado) ? resultado : [],
+      error: () => this.error = 'No se pudieron cargar los departamentos.',
+    });
+    this.sciudad.consulta().subscribe({
+      next: (resultado: any) => {
+        this.ciudades = Array.isArray(resultado) ? resultado : [];
+        this.actualizarCiudades();
+      },
+      error: () => this.error = 'No se pudieron cargar las ciudades.',
+    });
   }
 
   nuevo(): void {
     this.idEditando = null;
     this.formulario = this.formularioVacio();
+    this.ciudadesDisponibles = [];
     this.error = '';
     this.mostrarFormulario = true;
   }
@@ -50,8 +71,18 @@ export class Clientes implements OnInit {
   editar(item: any): void {
     this.idEditando = Number(item.id_cliente);
     this.formulario = { ...item };
+    this.formulario.fo_dpto = item.fo_dpto ?? '';
+    this.actualizarCiudades();
     this.error = '';
     this.mostrarFormulario = true;
+  }
+
+  actualizarCiudades(): void {
+    const departamento = Number(this.formulario.fo_dpto);
+    this.ciudadesDisponibles = this.ciudades.filter((ciudad) => Number(ciudad.fo_dpto) === departamento);
+    if (!this.ciudadesDisponibles.some((ciudad) => Number(ciudad.id_ciudad) === Number(this.formulario.fo_ciudad))) {
+      this.formulario.fo_ciudad = '';
+    }
   }
 
   guardar(): void {

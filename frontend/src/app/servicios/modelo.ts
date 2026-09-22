@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Modelo {
-  url = 'http://localhost/proyectos/Concesionario/Backend/modelos/modelo.php';
+    url = 'http://localhost/proyectos/Concesionario/Backend/controladores/modelo.php';
 
     constructor(private http: HttpClient) {};
 

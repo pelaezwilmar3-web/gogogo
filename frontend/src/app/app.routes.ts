@@ -10,6 +10,8 @@ import { Vehiculos } from './modulos/vehiculos/vehiculos';
 import { Compras } from './modulos/compras/compras';
 import { NoEncontro } from './modulos/no-encontro/no-encontro';
 import { ValidaruserGuard } from './guard/validaruser-guard';
+import { Pedido as PedidoComponent } from './modulos/pedido/pedido';
+import { Pedidoinsertar } from './modulos/pedidoinsertar/pedidoinsertar';
 
 const comprasGuard: CanActivateFn = () => {
     const usuarioGuardado = sessionStorage.getItem('usuario');
@@ -34,10 +36,12 @@ export const routes: Routes = [
         component: Main,
         canActivate: [ValidaruserGuard],
         children: [
-            { path: 'dashboard', component: Dashboard },
-            { path: 'clientes', component: Clientes },
-            { path: 'vehiculos', component: Vehiculos },
-            { path: 'ventas', component: Ventas },
+            { path: 'dashboard', component: Dashboard, canActivate: [ValidaruserGuard] },
+            { path: 'clientes', component: Clientes, canActivate: [ValidaruserGuard] },
+            { path: 'vehiculos', component: Vehiculos, canActivate: [ValidaruserGuard] },
+            { path: 'ventas', component: Ventas, canActivate: [ValidaruserGuard] },
+            {path: 'pedido', component: PedidoComponent, canActivate: [ValidaruserGuard]},
+            {path: 'pedidoins', component: Pedidoinsertar, canActivate: [ValidaruserGuard]},
             { path: 'compras', component: Compras, canActivate: [comprasGuard] },
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
         ],

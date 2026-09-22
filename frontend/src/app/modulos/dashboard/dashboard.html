@@ -5,9 +5,9 @@
                 <h1 class="m-0">Dashboard</h1>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-rigth">
-                    <li class="breadcrum-item"><a href="#">Home</a></li>
-                    <li class="breadcrum-item active">Bienvenido, {{ nombreUsuario }}</li>
+              <ol class="breadcrumb justify-content-end flex-column align-items-end">
+                <li class="breadcrumb-item active">Bienvenido, {{ nombreUsuario }}</li>
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
                 </ol>
             </div>
         </div>
@@ -29,40 +29,66 @@
   </nav>
 
   <h1 class="h4 mb-4">Panel general del concesionario</h1>
+  <p *ngIf="error" class="alert alert-danger">{{ error }}</p>
 
   <div class="row g-3 mb-4">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card card-vs p-3">
         <div class="small text-muted">Vehículos en stock</div>
-        <div class="fs-4 fw-semibold">128</div>
+        <div class="fs-4 fw-semibold">{{ resumen().stock }}</div>
       </div>
     </div>
 
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card card-vs p-3">
         <div class="small text-muted">Ventas del mes</div>
-        <div class="fs-4 fw-semibold">32</div>
+        <div class="fs-4 fw-semibold">{{ resumen().ventas_mes }}</div>
       </div>
     </div>
 
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card card-vs p-3">
         <div class="small text-muted">Clientes activos</div>
-        <div class="fs-4 fw-semibold">214</div>
+        <div class="fs-4 fw-semibold">{{ resumen().clientes }}</div>
       </div>
     </div>
 
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card card-vs p-3">
         <div class="small text-muted">Test drives hoy</div>
-        <div class="fs-4 fw-semibold">7</div>
+        <div class="fs-4 fw-semibold">{{ resumen().test_drives_hoy }}</div>
       </div>
     </div>
   </div>
 
   <div class="card card-vs p-3 mb-5">
     <h6>Ventas por mes</h6>
-    <canvas id="salesChart" height="120"></canvas>
+    <div class="sales-chart" *ngIf="ventasMes().length; else sinVentas">
+      <div class="chart-column" *ngFor="let venta of ventasMes()">
+        <span class="chart-value">{{ venta.ventas }}</span>
+        <div class="chart-bar" [style.height.%]="alturaBarra(venta.ventas)"></div>
+        <span class="chart-label">{{ venta.periodo }}</span>
+      </div>
+    </div>
+    <ng-template #sinVentas><p class="text-muted mb-0">No hay ventas registradas.</p></ng-template>
+  </div>
+
+  <div class="card card-vs p-3 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h6 class="mb-0">Test drive para clientes nuevos</h6>
+      <span class="badge bg-primary">Hoy: {{ resumen().test_drives_hoy }}</span>
+    </div>
+    <form class="row g-2 mb-3" (ngSubmit)="registrarTestDrive()">
+      <div class="col-md-3"><label class="form-label">ID cliente nuevo</label><input class="form-control" type="number" name="fo_cliente" [(ngModel)]="formularioTestDrive.fo_cliente" required></div>
+      <div class="col-md-3"><label class="form-label">Modelo</label><select class="form-control" name="fo_modelo" [(ngModel)]="formularioTestDrive.fo_modelo" required><option value="">Selecciona un modelo</option><option *ngFor="let modelo of modelos" [value]="modelo.id_modelo">{{ modelo.nombre }}</option></select></div>
+      <div class="col-md-3"><label class="form-label">Fecha y hora</label><input class="form-control" type="datetime-local" name="fecha" [(ngModel)]="formularioTestDrive.fecha" required></div>
+      <div class="col-md-3"><label class="form-label">Observaciones</label><input class="form-control" name="observaciones" [(ngModel)]="formularioTestDrive.observaciones"></div>
+      <div class="col-12"><button class="btn btn-primary" type="submit">Registrar test drive</button></div>
+    </form>
+    <p *ngIf="mensajeTestDrive" class="text-success">{{ mensajeTestDrive }}</p>
+    <div class="table-responsive" *ngIf="testDrives().length">
+      <table class="table table-sm mb-0"><thead><tr><th>Fecha</th><th>Cliente</th><th>Modelo</th><th>Vendedor</th></tr></thead><tbody><tr *ngFor="let testDrive of testDrives()"><td>{{ testDrive.fecha }}</td><td>{{ testDrive.cliente }}</td><td>{{ testDrive.modelo }}</td><td>{{ testDrive.usuario }}</td></tr></tbody></table>
+    </div>
   </div>
 </div>
     </div>

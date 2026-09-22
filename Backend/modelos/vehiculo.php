@@ -10,9 +10,10 @@
         //metodos
 
        public function consulta(){
-           $sql = "SELECT veh.*, ma.nombre AS marca, mo.nombre AS modelo FROM vehiculo veh
-                   INNER JOIN marca ma ON veh.fo_marca = ma.id_marca
-                   INNER JOIN modelo mo ON veh.fo_modelo = mo.id_modelo
+           $sql = "SELECT veh.*, COALESCE(ma.nombre, 'Marca no encontrada') AS marca,
+               COALESCE(mo.nombre, 'Modelo no encontrado') AS modelo FROM vehiculo veh
+               LEFT JOIN marca ma ON veh.fo_marca = ma.id_marca
+               LEFT JOIN modelo mo ON veh.fo_modelo = mo.id_modelo
                    ORDER BY veh.fecha_ingreso";
            $res = mysqli_query($this->conexion, $sql) or die('no encontro la tabla vehiculo');
         

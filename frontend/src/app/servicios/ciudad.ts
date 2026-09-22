@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Ciudad {
-    url = 'http://localhost/proyectos/Concesionario/Backend/modelos/ciudad.php';
+    url = 'http://localhost/proyectos/Concesionario/Backend/controladores/ciudad.php';
 
     constructor(private http: HttpClient) {};
 

@@ -4,13 +4,21 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class Marca {
-    url = 'http://localhost/proyectos/Concesionario/Backend/controladores/marca.php';
+export class Pedido {
+    url = 'http://localhost/proyectos/Concesionario/Backend/controladores/pedido.php';
 
-    constructor(private http: HttpClient) {};
+  constructor(private http: HttpClient) { }
 
-    consulta(){
-        return this.http.get(`${this.url}?control=consulta`);
+   consulta(){
+        return this.http.get<any[]>(`${this.url}?control=consulta`); 
+    }
+
+    disponibles(){
+        return this.http.get<any[]>(`${this.url}?control=disponibles`);
+    }
+
+    consultarp(id: number){
+        return this.http.get(`${this.url}?control=vehiculos&id=${id}`);
     }
 
     insertar(params: any){
@@ -24,4 +32,5 @@ export class Marca {
     eliminar(id: number){
         return this.http.get(`${this.url}?control=eliminar&id=${id}`);
     }
+    
 }

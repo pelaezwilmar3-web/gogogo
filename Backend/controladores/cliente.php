@@ -43,6 +43,13 @@
 
            $vec = $cliente->eliminar($id);
         break;
+        case 'filtro':
+           $dato = $_GET['dato'];
+           $vec = $cliente->filtro($dato);
+        break;
+        case 'ccliente':
+           $dato = $_GET['dato'];
+           $vec = $cliente->consultar_cliente($dato);
    }
 
       if (isset($vec['resultado']) && $vec['resultado'] === 'ERROR') {

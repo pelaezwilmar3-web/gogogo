@@ -17,7 +17,7 @@
            $json = file_get_contents('php://input');
            $params = json_decode($json);
 
-         if (!$params || empty($params->fecha) || empty($params->cantidad) || empty($params->subtotal) || empty($params->total) || empty($params->impuesto) || empty($params->fo_usuario) || empty($params->fo_proveedor) || empty($params->fo_vehiculo)) {
+         if (!$params || empty($params->fecha) || !isset($params->cantidad, $params->subtotal, $params->total, $params->impuesto, $params->fo_usuario, $params->fo_proveedor, $params->serial, $params->{'año'}, $params->color, $params->precio, $params->fecha_ingreso, $params->fo_marca, $params->fo_modelo) || $params->cantidad <= 0 || $params->subtotal < 0 || $params->total < 0 || $params->impuesto < 0 || empty($params->serial) || empty($params->color) || empty($params->fecha_ingreso)) {
             http_response_code(400);
             echo json_encode(['resultado' => 'ERROR', 'mensaje' => 'Todos los campos de la compra son obligatorios']);
             exit;

@@ -11,13 +11,17 @@
       <div class="col-lg-10">
         <form (ngSubmit)="guardar()" class="row g-2">
           <div class="col-md-3"><label class="form-label">Fecha</label><input class="form-control" type="date" name="fecha" [(ngModel)]="formulario.fecha" required></div>
-          <div class="col-md-2"><label class="form-label">Cantidad</label><input class="form-control" type="number" name="cantidad" [(ngModel)]="formulario.cantidad" required></div>
-          <div class="col-md-2"><label class="form-label">Subtotal</label><input class="form-control" type="number" name="subtotal" [(ngModel)]="formulario.subtotal" required></div>
-          <div class="col-md-2"><label class="form-label">Total</label><input class="form-control" type="number" name="total" [(ngModel)]="formulario.total" required></div>
-          <div class="col-md-2"><label class="form-label">Impuesto</label><input class="form-control" type="number" name="impuesto" [(ngModel)]="formulario.impuesto" required></div>
-          <div class="col-md-2"><label class="form-label">ID usuario</label><input class="form-control" type="number" name="fo_usuario" [(ngModel)]="formulario.fo_usuario" required></div>
-          <div class="col-md-2"><label class="form-label">ID proveedor</label><input class="form-control" type="number" name="fo_proveedor" [(ngModel)]="formulario.fo_proveedor" required></div>
-          <div class="col-md-2"><label class="form-label">ID vehículo</label><input class="form-control" type="number" name="fo_vehiculo" [(ngModel)]="formulario.fo_vehiculo" required></div>
+          <div class="col-md-2"><label class="form-label">Cantidad</label><input class="form-control" type="number" name="cantidad" [(ngModel)]="formulario.cantidad" (ngModelChange)="calcularTotales()" min="1" required></div>
+          <div class="col-md-2"><label class="form-label">Precio unitario</label><input class="form-control" type="number" name="subtotal" [(ngModel)]="formulario.subtotal" (ngModelChange)="calcularTotales()" min="0" required></div>
+          <div class="col-md-2"><label class="form-label">Impuesto (19%)</label><input class="form-control" type="number" name="impuesto" [(ngModel)]="formulario.impuesto" readonly></div>
+          <div class="col-md-2"><label class="form-label">Total</label><input class="form-control" type="number" name="total" [(ngModel)]="formulario.total" readonly></div>
+          <div class="col-md-3"><label class="form-label">Proveedor</label><select class="form-control" name="fo_proveedor" [(ngModel)]="formulario.fo_proveedor" required><option value="">Selecciona un proveedor</option><option *ngFor="let proveedor of proveedores" [value]="proveedor.id_proveedor">{{ proveedor.razon_social }}</option></select></div>
+          <div class="col-md-3"><label class="form-label">Serial</label><input class="form-control" name="serial" [(ngModel)]="formulario.serial" required></div>
+          <div class="col-md-2"><label class="form-label">Año</label><input class="form-control" type="number" name="año" [(ngModel)]="formulario['año']" required></div>
+          <div class="col-md-3"><label class="form-label">Color</label><input class="form-control" name="color" [(ngModel)]="formulario.color" required></div>
+          <div class="col-md-3"><label class="form-label">Fecha ingreso</label><input class="form-control" type="date" name="fecha_ingreso" [(ngModel)]="formulario.fecha_ingreso" required></div>
+          <div class="col-md-3"><label class="form-label">Marca</label><select class="form-control" name="fo_marca" [(ngModel)]="formulario.fo_marca" (ngModelChange)="actualizarModelos()" required><option value="">Selecciona una marca</option><option *ngFor="let marca of marcas" [value]="marca.id_marca">{{ marca.nombre }}</option></select></div>
+          <div class="col-md-3"><label class="form-label">Modelo</label><select class="form-control" name="fo_modelo" [(ngModel)]="formulario.fo_modelo" [disabled]="!formulario.fo_marca" required><option value="">Selecciona un modelo</option><option *ngFor="let modelo of modelosDisponibles" [value]="modelo.id_modelo">{{ modelo.nombre }}</option></select></div>
           <div class="col-12"><button class="btn btn-primary me-2" type="submit">Guardar</button><button class="btn btn-secondary" type="button" (click)="mostrarFormulario = false">Cancelar</button></div>
         </form>
       </div>

@@ -20,6 +20,7 @@
     <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/vehiculos" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-car mr-2"></i>Vehículos</a></li>
     <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/clientes" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-users mr-2"></i>Clientes</a></li>
     <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/ventas" routerLinkActive="active" (click)="cerrarMenu()"><i class="fas fa-shopping-cart mr-2"></i>Ventas</a></li>
+    <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/pedido" routerLinkActive="active" (click)="irAPedidos($event)"><i class="fas fa-clipboard-list mr-2"></i>Pedidos</a></li>
     @if (puedeVerCompras) {
       <li class="nav-item mb-2"><a class="nav-link text-light" routerLink="/compras" routerLinkActive="active" (click)="cerrarMenu()"><i class="bi bi-bag mr-2"></i>Compras</a></li>
     }

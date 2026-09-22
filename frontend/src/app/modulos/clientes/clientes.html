@@ -6,9 +6,9 @@
                 <h1 class="m-0">Clientes</h1>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-rigth">
-                    <li class="breadcrum-item"><a href="#">Home</a></li>
-                    <li class="breadcrum-item active">Clientes</li>
+                <ol class="breadcrumb justify-content-end flex-column align-items-end">
+                    <li class="breadcrumb-item active">Clientes</li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                 </ol>
             </div>
         </div>
@@ -28,7 +28,8 @@
                         <div class="col-md-4"><label class="form-label">Dirección</label><input class="form-control" name="direccion" [(ngModel)]="formulario.direccion" required></div>
                         <div class="col-md-4"><label class="form-label">Celular</label><input class="form-control" name="celular" [(ngModel)]="formulario.celular" required></div>
                         <div class="col-md-4"><label class="form-label">Email</label><input class="form-control" type="email" name="email" [(ngModel)]="formulario.email" required></div>
-                        <div class="col-md-4"><label class="form-label">ID ciudad</label><input class="form-control" type="number" name="fo_ciudad" [(ngModel)]="formulario.fo_ciudad" required></div>
+                        <div class="col-md-4"><label class="form-label">Departamento</label><select class="form-control" name="fo_dpto" [(ngModel)]="formulario.fo_dpto" (ngModelChange)="actualizarCiudades()" required><option value="">Selecciona un departamento</option><option *ngFor="let departamento of departamentos" [value]="departamento.id_dpto">{{ departamento.nombre }}</option></select></div>
+                        <div class="col-md-4"><label class="form-label">Ciudad</label><select class="form-control" name="fo_ciudad" [(ngModel)]="formulario.fo_ciudad" [disabled]="!formulario.fo_dpto" required><option value="">Selecciona una ciudad</option><option *ngFor="let ciudad of ciudadesDisponibles" [value]="ciudad.id_ciudad">{{ ciudad.nombre }}</option></select></div>
                         <div class="col-12"><button class="btn btn-primary me-2" type="submit">Guardar</button><button class="btn btn-secondary" type="button" (click)="mostrarFormulario = false">Cancelar</button></div>
                     </form>
                 </div>
@@ -47,6 +48,8 @@
                             <th>Direccion</th>
                             <th>Celular</th>
                             <th>Email</th>
+                            <th>Ciudad</th>
+                            <th>Departamento</th>
                             <th>Acciones</th>
                         </tr>
                         @for (item of clientes(); track item.id_cliente) {
@@ -56,6 +59,8 @@
                             <td>{{item.direccion}}</td>
                             <td>{{item.celular}}</td>
                             <td>{{item.email}}</td>
+                            <td>{{item.ciudad}}</td>
+                            <td>{{item.dpto}}</td>
                                                                 <td>
                                                                         <button type="button" class="btn btn-link p-1" (click)="editar(item)" title="Editar">
                                                                             <i class="bi bi-pencil-square text-primary"></i>

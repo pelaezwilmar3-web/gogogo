@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 export class Nav {
   menuAbierto = false;
   puedeVerCompras = false;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const usuarioGuardado = sessionStorage.getItem('usuario');
@@ -34,6 +36,12 @@ export class Nav {
 
   cerrarMenu() {
     this.menuAbierto = false;
+  }
+
+  irAPedidos(evento: Event) {
+    evento.preventDefault();
+    this.menuAbierto = false;
+    this.router.navigate(['/pedido']);
   }
 
   private normalizar(valor: unknown) {
